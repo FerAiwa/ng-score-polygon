@@ -1,0 +1,18 @@
+{
+  "npmScope": "aiwa-lab",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "aiwa-portfolio-e2e": {
+      "tags": []
+    },
+    "aiwa-portfolio": {
+      "tags": []
+    }
+  }
+}
