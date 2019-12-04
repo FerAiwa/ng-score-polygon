@@ -11,7 +11,7 @@ The component is totaly responsive, and most of the the styling is customizable.
 
 ## Demo
 
-Want a peek before downloading? There is a demo avaliable [here](www.google.com)
+Want a peek before downloading? There is a demo avaliable [here](https://feraiwa.github.io/ng-score-polygon/)
 
 ## Instalation
 
@@ -31,7 +31,7 @@ Want a peek before downloading? There is a demo avaliable [here](www.google.com)
 
 3. Define the component in your template.
 
-   `<aiwa-score-polygon [scores]="yourScores" [width]="200"></aiwa-score-polygon>`
+   `<ng-score-polygon [scores]="yourScores"></ng-score-polygon>`
 
 ## Extra Customization:
 
@@ -39,8 +39,8 @@ Colors and maker´s format can be changed using [property binding].
 
 ### Colors (string)
 
-| Variable                   | Description                                             | Default |
-| -------------------------- | ------------------------------------------------------- | ------- |
+| Variable                   | Description                                             |
+| -------------------------- | ------------------------------------------------------- |
 | `[ scorePolygonColor ]`    | Sets color of the score polygon.                        |
 | `[ maxScorePolygonColor ]` | Sets color of the wrapper polygon.                      |
 | `[ innerLinesColor ]`      | Sets color of the lines from edge to center of polygon. |
@@ -49,16 +49,12 @@ Colors and maker´s format can be changed using [property binding].
 
 ### Labels & Text (boolean)
 
-| Variable                  | Description                                                                     | Default |
-| ------------------------- | ------------------------------------------------------------------------------- | ------- |
-| `[ showText ]`            | Enables/disables the score labels at the polygon edges.                         | false   |
-| `[ showIcons ]`           | Enable/disables a rounded icon at the polygon edges.                            | true    |
-| `[ showPercentPolygons ]` | Enables/disables small polygons from outside to the center with 10% separation. | true    |
-| `[ showOuterCircle ]`     | Shows/hides the circle surrounding the polygon                                  | true    |
-
-## License
-
-Feel free to use and reproduce.
+| Variable                | Description                                                                     | Default |
+| ----------------------- | ------------------------------------------------------------------------------- | ------- |
+| `[ showText ]`          | Enables/disables the score labels at the polygon edges.                         | false   |
+| `[ showIcons ]`         | Enable/disables a rounded icon at the polygon edges.                            | true    |
+| `[showPercentPolygons]` | Enables/disables small polygons from outside to the center with 10% separation. | true    |
+| `[ showOuterCircle ]`   | Shows/hides the circle surrounding the polygon                                  | true    |
 
 ## Contact
 
