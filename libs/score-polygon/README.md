@@ -1,5 +1,7 @@
 # NG SCORE POLYGON
 
+![Image of ng-polygon-score](https://repository-images.githubusercontent.com/225927254/9748c900-16db-11ea-9f54-0e731cad1a80)
+
 ## Description
 
 This component automaticaly generates a regular polygon for a list of scores given as input. This can be specialy apealing
@@ -20,7 +22,7 @@ Want a peek before downloading? There is a demo avaliable [here](https://feraiwa
 
 ## Basic usage
 
-1. Import the SVGScorePolygonModule in your Angular app.
+1. Import the ScorePolygonModule in your Angular app.
 2. Create your scores, with the following format:
 
    `{ label: string; score: number; markerImage?: string; }`
