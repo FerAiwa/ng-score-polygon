@@ -1,0 +1,27 @@
+{
+  "name": "ng-score-polygon",
+  "description": "Angular lib that allows creation represent a set of scores inside generated regular SVG polygons",
+  "version": "0.0.1",
+  "homepage": "https://github.com/FerAiwa/ng-score-polygon",
+  "author": "Fer Ayguavives (https://github.com/FerAiwa)",
+  "license": "MIT",
+  "keywords": [
+    "ng",
+    "angular",
+    "SVG",
+    "data-visualization",
+    "score-graphic",
+    "score-polygon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FerAiwa/ng-score-polygon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FerAiwa/ng-score-polygon/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^8.2.0",
+    "@angular/core": "^8.2.0"
+  }
+}

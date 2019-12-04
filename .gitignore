@@ -9,6 +9,7 @@
 /node_modules
 
 # IDEs and editors
+/_TEMP
 /.idea
 .project
 .classpath

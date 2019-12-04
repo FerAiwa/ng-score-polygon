@@ -1,107 +1,95 @@
-<header class="flex">
-  <img
-    alt="Nx logo"
-    width="75"
-    src="https://nx.dev/assets/images/nx-logo-white.svg"
-  />
-  <h1>Welcome to {{ title }}!</h1>
+<header>
+  <h1>NG Score Polygon</h1>
+  <a href="http://www.google.com"
+     target="_blank"> <img alt="npm"
+         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADhCAMAAADmr0l2AAAAdVBMVEXLODf////KMC/ciYnKMzLIJiTvycnXcnHHGRf/+/vUY2Pbg4Pdjo3JKyrkpaTLNjXIIB/JKSfjoKD46OjOSEf89PTz2NfIIiDmqqrRVlXafX3HFhTswsLhmJfotLTSXFv24eHVaWnx0dDNPz7Wbm7PT07ZeHdo9cgpAAADpUlEQVR4nO3d63aiMBSG4QQChZZMAoggxbbS1vu/xImnJVVgajuKe6/v/a/NswIJnoqQw+VhlfhP64c7bv3kJ1WYjyDEEK5aCRtoz/PUXecGqAMrVtUQshdYvCwirYwgk1FptHgpvgkskjRVUw/58lSaJj3Ec2AWaEJz183oIPsnsFEpUd4mk6pwHFhbwrxNxtYjwHympx7g79OzfAjYUlxbzlPpvB8YPhM/PA+Z57APGFI//Y4ZG54DWy7zt8k8t6fA3GPk22yJ+QlwxmJ9OaY+vwJ9BvvD11K/C2yjqcfz/4vaDvCd1Qm4y7wfgVU69WiuUVAdgDHl6+vhTBrvgRnLCXTrTLYHGpYT6KbQ7IBNOfVIrlXZbIErZnv8MbXaAAuGe+ChKHbAJph6GNcraByw9qYexvXyagecMV1DN5mZFAXbNdRlgkLMOQNFORcN08uYXWkjKnavBLvpSiwZL6JuGV2KhDcwET5voA8g7QCkHoDUA5B6AFIPQOoBSD0AqQcg9QAcTUU3zt4WqB5lfOMuFv4WeOsu/igTQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAfxGTfZnqOz0n22QBNZWD2V9DsCn4b/pJQACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggN3Mog1/VPuhBp9UPYw96cV3lv/dLVFM8MOGfU449sCLh4ib2lAPQOoBSD0AqQcg9QCkHoDUA5B6AFIPQOoBSD0HTHgDE/7ATE89iGumM/GSTj2Ia5a+iMvf76dUEIr88nugE8rmIvbM1KO4XsaLhXwd+6yHeOpVCrlkvIzqpQPOGZ+Edu6Aku9JaJTcABO2x6hOtsA3tseofdsC2a6jbg3dAUOmU2jDPVAuWE7hdgJ3QJ47hdsjDkBZM1xIdS2PwILfXmi8ogOU4cXfArv3ov2NDPdAuSynHtH/rVzKr0D5weo01B/yFCg/Gb375H3Kc2C8YCP0FnEP0AmZHKW64+sCpVyz2PDtumv6ApRVRH4/VFElh4Fy/p6SJpr0fS7HgG5DtITXGs8uTz1nQJnXEc0LN+NFdX7GOQc6oq9Hvzd+l6lA++e8fqDbMZrHqNSKyEQapcvosYl7Kf3AjbHNVqK0P/3lwO2ypVhlYb9uDLitePvhbz9uV/tWjBL+AruTePt2wL28AAAAAElFTkSuQmCC"
+         width="30">
+  </a>
+  <a href="http://www.google.com"
+     target="_blank">
+    <img alt="Github repo"
+         src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+         width="30">
+  </a>
+
+  <a href="https://www.linkedin.com/in/ferayguavives"
+     target="_blank">
+    <img id="github-logo"
+         alt="Fer Ayguavives Linkedin"
+         src="data:image/png;base64,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"
+         width="30">
+  </a>
+
 </header>
-<main>
-  <h2>Resources &amp; Tools</h2>
-  <p>
-    Thank you for using and showing some ♥ for Nx.
-  </p>
-  <div class="flex github-star-container">
-    <a
-      href="https://github.com/nrwl/nx"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      If you like Nx, please give it a star:
-      <div class="github-star-badge">
-        <svg
-          class="material-icons"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path
-            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-          />
-        </svg>
-        Star
-      </div>
-    </a>
-  </div>
-  <p>
-    Here are some links to help you get started.
-  </p>
-  <ul class="resources">
-    <li class="col-span-2">
-      <a
-        class="resource flex"
-        href="https://connect.nrwl.io/app/courses/nx-workspaces/intro"
-      >
-        Nx video course
-      </a>
-    </li>
-    <li class="col-span-2">
-      <a
-        class="resource flex"
-        href="https://nx.dev/angular/getting-started/what-is-nx"
-      >
-        Nx video tutorial
-      </a>
-    </li>
-    <li class="col-span-2">
-      <a
-        class="resource flex"
-        href="https://nx.dev/angular/tutorial/01-create-application"
-      >
-        Interactive tutorial
-      </a>
-    </li>
-    <li class="col-span-2">
-      <a class="resource flex" href="https://connect.nrwl.io/">
-        <img
-          height="36"
-          alt="Nrwl Connect"
-          src="https://connect.nrwl.io/assets/img/CONNECT_ColorIcon.png"
-        />
-        <span class="gutter-left">Nrwl Connect</span>
-      </a>
-    </li>
-  </ul>
-  <h2>Next Steps</h2>
-  <p>Here are some things you can do with Nx.</p>
-  <details open>
-    <summary>Add UI library</summary>
-    <pre>
-# Generate UI lib
-ng g @nrwl/angular:lib ui
 
-# Add a component
-ng g @nrwl/angular:component xyz --project ui</pre
-    >
-  </details>
-  <details>
-    <summary>View dependency graph</summary>
-    <pre>nx dep-graph</pre>
-  </details>
-  <details>
-    <summary>Run affected commands</summary>
-    <pre>
-# see what's been affected by changes
-ng affected:dep-graph
 
-# run tests for current changes
-ng affected:test
+<div style="display:flex; width: 100%;  justify-content: left; flex-flow: row wrap-reverse">
+  <section class="polygon-inputs">
+    <div>
+      <label>Number of edges: {{scores.length}}</label>
+      <input type="range"
+             step="1"
+             value="{{scores.length}}"
+             min="3"
+             max="10"
+             (change)="updateEdges($event.target.value)">
+      <p>
+        <button (click)="randomizeScores()">Randomize scores</button>
+      </p>
+    </div>
 
-# run e2e tests for current changes
-ng affected:e2e
-</pre
-    >
-  </details>
-</main>
+    <h2>Colors</h2>
+    <div>
+      <label>Score polygon </label>
+      <input type="color"
+             value="#0e529e"
+             (change)="updateColor($event.target.value)">
+    </div>
+    <div>
+      <label>Max Score Polygon</label>
+      <input type="color"
+             value="#dadada"
+             (change)="updateBackgroundColor($event.target.value)">
+    </div>
+    <div>
+      <label>Inner lines</label>
+      <input (change)="updateInnerLinesColor($event.target.value)"
+             value="#90ee90"
+             type="color">
+    </div>
+
+    <h2>Extra</h2>
+    <div>
+      <label for="markers-text">Show text markers</label>
+      <input type="checkbox"
+             id="markers-text"
+             (change)="updateTextMarkerDisplay($event.target.checked)">
+    </div>
+    <div>
+      <label for="markers-icon">Show icon markers</label>
+      <input id="markers-icon"
+             type="checkbox"
+             checked
+             (change)="updateIconMarkersDisplay($event.target.checked)">
+    </div>
+    <div>
+      <label for="markers-percent">Show Percentual polygons</label>
+      <input id="markers-percent"
+             type="checkbox"
+             checked
+             (change)="updatePercentPolygonDisplay($event.target.checked)">
+    </div>
+    <div>
+      <label for="outer-circle">Show Outer Circle </label>
+      <input id="outer-circle"
+             type="checkbox"
+             checked
+             (change)="updateOuterCircleDisplay($event.target.checked)">
+    </div>
+
+  </section>
+  <ng-score-polygon style="flex:1;  max-width: 620px;"
+                    [scores]="scores">
+  </ng-score-polygon>
+
+</div>

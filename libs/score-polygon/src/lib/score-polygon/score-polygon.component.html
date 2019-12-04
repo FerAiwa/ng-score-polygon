@@ -1,0 +1,91 @@
+<svg viewBox="0 0 200 200">
+  <ng-container *ngIf="activeScore">
+    <text x="20"
+          y="10">{{activeScore.label}}</text>
+    <text x="150"
+          y="10"> Score: {{activeScore.score}}/10</text>
+  </ng-container>
+
+  <g transform="translate(100,100) scale(.8)">
+    <circle id="surrounding-circle"
+            *ngIf="showOuterCircle"
+            r="100"
+            [attr.stroke]="outerCircleColor"
+            opacity="0.5"
+            stroke-width="1"
+            fill="none" />
+
+    <defs>
+      <polygon id="wrapper-polygon"
+               [attr.points]="vortex"
+               [style.opacity]=".2"
+               [style.stroke]="maxScorePolygonColor" />
+    </defs>
+
+    <polygon [attr.points]="vortex"
+             [style.opacity]="1"
+             [style.fill]="maxScorePolygonColor" />
+
+    <ng-container *ngIf="showPercentPolygons">
+      <use href="#wrapper-polygon"
+           *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]"
+           [style.transform]="getScaledPolygon(i)">
+      </use>
+    </ng-container>
+
+    <polygon id="score-polygon"
+             [attr.points]="points"
+             [style.fill]="scorePolygonColor"
+             style="opacity:.9">
+
+      <animateTransform #polyscale
+                        id="polyscale"
+                        attributeName="transform"
+                        type="scale"
+                        begin="0s"
+                        from="0"
+                        to="1"
+                        dur="0.5s" />
+    </polygon>
+
+    <ng-container *ngFor="let point of pointList; let i=index">
+      <defs *ngIf="showIcons">
+        <pattern [id]="'pattern-'+i"
+                 transform="rotate(65deg)"
+                 width="16"
+                 height="16">
+          <image [attr.href]="scores[i].markerImage"
+                 preserveAspectRatio="none"
+                 width="16"
+                 height="16" />
+        </pattern>
+      </defs>
+
+      <polyline class="core-lines"
+                [attr.points]="getLine(i, point)"
+                [style.stroke]="innerLinesColor"
+                style="opacity:.15">
+      </polyline>
+
+      <circle *ngIf="showIcons"
+              class="edge-marker"
+              [attr.fill]="getMarkerPattern(i)"
+              r="8"
+              [attr.cx]="point.x"
+              [attr.cy]="point.y"
+              [attr.stroke]="iconCircleColor"
+              (click)="showScoreTooltip(i)"
+              (mouseover)="showScoreTooltip(i)">
+      </circle>
+
+      <text *ngIf="showText"
+            [attr.x]="point.x"
+            transform="translate(-12, -10)"
+            [attr.y]="point.y"
+            (mouseover)="showScoreTooltip(i)"
+            (click)="showScoreTooltip(i)">
+        {{scores[i].label}}
+      </text>
+    </ng-container>
+  </g>
+</svg>

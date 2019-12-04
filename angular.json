@@ -123,6 +123,40 @@
           }
         }
       }
+    },
+    "score-polygon": {
+      "projectType": "library",
+      "root": "libs/score-polygon",
+      "sourceRoot": "libs/score-polygon/src",
+      "prefix": "aiwa-lab",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/score-polygon/tsconfig.lib.json",
+            "project": "libs/score-polygon/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/score-polygon/tsconfig.lib.json",
+              "libs/score-polygon/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/score-polygon/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/score-polygon/jest.config.js",
+            "tsConfig": "libs/score-polygon/tsconfig.spec.json",
+            "setupFile": "libs/score-polygon/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
