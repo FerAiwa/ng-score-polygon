@@ -9,6 +9,6 @@ Welcome to my workspace! If you want to take a peek on some small projects or id
 ![Image of ng-polygon-score](https://repository-images.githubusercontent.com/225927254/9748c900-16db-11ea-9f54-0e731cad1a80)
 
 - [Demo](https://feraiwa.github.io/ng-score-polygon/)
-- [Npm page]()
+- [Npm page](https://www.npmjs.com/package/ng-score-polygon)
 
 This project was generated using [Nx](https://nx.dev).
