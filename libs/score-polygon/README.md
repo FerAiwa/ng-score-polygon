@@ -51,8 +51,8 @@ export class AppModule {}
 userScores = [
   { label: 'Proactivity', score: 8, markerImage: './assets/a.jpg' },
   { label: 'Effort', score: 7, markerImage: './assets/b.jpg' },
-  { label: 'Creativity', score: 8, markerImage: './assets/c.jpg' } }
-]
+  { label: 'Creativity', score: 8, markerImage: './assets/c.jpg' }
+];
 ```
 
 3. Define the component in your template.
