@@ -4,10 +4,8 @@
 
 ## Description
 
-This component automaticaly generates a regular polygon for a list of scores given as input. This can be specialy apealing
+This component automaticaly generates regular N-side polygons for a list of scores. This can be specialy apealing
 to display rated lists from 3 to 12 elements.
-
-Given a set of formated scores it will automaticaly generate a N-side SVG polygon, that is ready to go!
 
 The component is totaly responsive, and most of the the styling is customizable. Check the Customization section for details.
 
@@ -17,12 +15,29 @@ Want a peek before downloading? There is a demo avaliable [here](https://feraiwa
 
 ## Instalation
 
-- Angular:
-  `npm i ng-score-polygon`
+- In your Angular project:
+  `npm i ng-score-polygon --save`
 
 ## Basic usage
 
 1. Import the ScorePolygonModule in your Angular app.
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+
+import { ScorePolygonModule } from 'ng-score-polygon';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, ScorePolygonModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
 2. Create your scores, with the following format:
 
    `{ label: string; score: number; markerImage?: string; }`
@@ -30,10 +45,21 @@ Want a peek before downloading? There is a demo avaliable [here](https://feraiwa
 - Label: The name of the entity represented by a score.
 - Score: A score in a scale from 0 to 10.
 - markerImage (optional): Path to the background image representing the score. If used, should be square-shaped to be properly displayed.
+- Example:
+
+```typescript
+userScores = [
+  { label: 'Proactivity', score: 8, markerImage: './assets/a.jpg' },
+  { label: 'Effort', score: 7, markerImage: './assets/b.jpg' },
+  { label: 'Creativity', score: 8, markerImage: './assets/c.jpg' } }
+]
+```
 
 3. Define the component in your template.
 
-   `<ng-score-polygon [scores]="yourScores"></ng-score-polygon>`
+   ```xml
+   <ng-score-polygon [scores]="userScores"></ng-score-polygon>
+   ```
 
 ## Extra Customization:
 
