@@ -10,19 +10,31 @@ import { SCORESMOCK } from '../assets/data/scores';
 export class AppComponent implements OnInit {
   @ViewChild(ScorePolygonComponent, { static: false })
   polygonComponent: ScorePolygonComponent;
+  edges = 5;
   scores;
+  compareScores;
+  scoreSlide;
 
   ngOnInit() {
-    this.updateEdges(5);
+    this.updateEdges(this.edges);
   }
 
   updateEdges(quantity: number) {
-    this.scores = [...SCORESMOCK].splice(0, quantity);
-    this.randomizeScores();
+    this.edges = quantity;
+    const scores = [...SCORESMOCK].splice(0, quantity);
+    this.scores = this.randomizeScores(scores);
+    this.compareScores = this.randomizeScores(scores);
+
+    const months = ['Jan', 'Feb', 'Mar', 'May', 'Jun'];
+    this.scoreSlide = new Array(5).fill('').map((x, i) => ({
+      eventLabel: months[i],
+      scores: this.randomizeScores(scores)
+    }));
+    console.log(this.scoreSlide);
   }
 
-  randomizeScores() {
-    this.scores = this.scores.map(score => ({
+  randomizeScores(scores) {
+    return scores.map(score => ({
       ...score,
       score: (Math.random() * 10).toFixed(0)
     }));

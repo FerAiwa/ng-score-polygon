@@ -1,3 +1,5 @@
+<button (click)="polyscale.beginElement()">Play</button>
+<button (click)="showPath()">Stop</button>
 <svg viewBox="0 0 200 200">
   <ng-container *ngIf="activeScore">
     <text x="20"
@@ -17,12 +19,12 @@
 
     <defs>
       <polygon id="wrapper-polygon"
-               [attr.points]="vortex"
-               [style.opacity]=".2"
+               [attr.points]="wrapperPolygon"
+               [style.opacity]=".1"
                [style.stroke]="maxScorePolygonColor" />
     </defs>
 
-    <polygon [attr.points]="vortex"
+    <polygon [attr.points]="wrapperPolygon"
              [style.opacity]="1"
              [style.fill]="maxScorePolygonColor" />
 
@@ -33,22 +35,42 @@
       </use>
     </ng-container>
 
-    <polygon id="score-polygon"
-             [attr.points]="points"
-             [style.fill]="scorePolygonColor"
-             style="opacity:.9">
+    <ng-container *ngIf="compareScores.length">
+      <polygon id="compare-polygon"
+               [attr.points]="getComparePolygon()"
+               [style.fill]="comparePolygonColor"
+               style="opacity:1" />
+    </ng-container>
 
-      <animateTransform #polyscale
+    <path id="score-polygon"
+          [attr.d]="getPolygonFromScores()"
+          fill="#070707"
+          fill-rule="nonzero"
+          style="opacity:.4">
+
+      <animate #polyscale
+               dur="10s"
+               fill="freeze"
+               repeatCount="indefinite"
+               attributeName="d"
+               [attr.values]="frameSequence"
+               calcMode=”spline”
+               keySplines="0.4 0 0.2 1">
+      </animate>
+
+
+
+      <!--       <animateTransform #polyscale
                         id="polyscale"
                         attributeName="transform"
                         type="scale"
                         begin="0s"
                         from="0"
                         to="1"
-                        dur="0.5s" />
-    </polygon>
+                        dur="0.5s" /> -->
+    </path>
 
-    <ng-container *ngFor="let point of pointList; let i=index">
+    <ng-container *ngFor="let point of vortexPoints; let i=index">
       <defs *ngIf="showIcons">
         <pattern [id]="'pattern-'+i"
                  transform="rotate(65deg)"
@@ -87,5 +109,72 @@
         {{scores[i].label}}
       </text>
     </ng-container>
+  </g>
+
+  <g>
+    <!--     <circle cx="100"
+            cy="100"
+            r="20"
+            fill="red">
+      <animate begin="0s"
+               dur="10s"
+               fill="freeze"
+               repeatCount="indefinite"
+               attributeName="fill"
+               values="transparent; red; transparent; red"
+               calcMode=”spline”
+               keySplines="0.4 0 0.2 1">
+      </animate>
+    </circle> -->
+
+
+    <!-- Testing line de tiempo -->
+    <line x1="0"
+          [attr.x2]="eventScores.length * 100"
+          y1="190"
+          y2="190"
+          stroke="red">
+    </line>
+    <text x="100"
+          y="195"
+          style="text-anchor: middle">Hello
+
+      <!--           <animate #polyscale
+          dur="10s"
+          fill="freeze"
+          repeatCount="indefinite"
+          attributeName="d"
+          [attr.values]="frameSequence"
+          calcMode=”spline”
+          keySplines="0.4 0 0.2 1">
+ </animate> -->
+
+      <!--       <animateTransform dur="1s"
+                        begin="0s"
+                        fill="freeze"
+                        repeatCount="indefinite"
+                        attributeName="transform"
+                        type="rotate"
+                        values="0 100 195; 90 100 195; -90 100 195"
+                        calcMode=”spline”
+                        keySplines="0.4 0 0.2 1">
+      </animateTransform> -->
+      <!--
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="0 100 100"
+                        to="360 100 100"
+                        begin="0s"
+                        dur="10s"
+                        repeatCount="indefinite" /> -->
+    </text>
+    <text x="200"
+          y="195"
+          style="text-anchor: middle">there</text>
+    <text x="300"
+          y="195"
+          style="text-anchor: middle">i go
+
+    </text>
   </g>
 </svg>
