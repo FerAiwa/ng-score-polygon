@@ -35,23 +35,23 @@
       </use>
     </ng-container>
 
-    <ng-container *ngIf="compareScores.length">
-      <polygon id="compare-polygon"
-               [attr.points]="getComparePolygon()"
-               [style.fill]="comparePolygonColor"
-               style="opacity:1" />
+    <ng-container>
+      <path id="compare-polygon"
+            *ngIf="compareScores.length"
+            [attr.d]="'M'+getComparePolygon()"
+            [style.fill]="comparePolygonColor"
+            style="opacity:.5" />
     </ng-container>
 
     <path id="score-polygon"
-          [attr.d]="getPolygonFromScores()"
-          fill="#070707"
-          fill-rule="nonzero"
-          style="opacity:.4">
+          [attr.d]="'M'+getPolygonFromScores()"
+          [style.fill]="scorePolygonColor"
+          style="opacity:.5">
 
       <animate #polyscale
-               dur="10s"
+               dur="1s"
                fill="freeze"
-               repeatCount="indefinite"
+               repeatCount="1"
                attributeName="d"
                [attr.values]="frameSequence"
                calcMode=”spline”
@@ -109,72 +109,5 @@
         {{scores[i].label}}
       </text>
     </ng-container>
-  </g>
-
-  <g>
-    <!--     <circle cx="100"
-            cy="100"
-            r="20"
-            fill="red">
-      <animate begin="0s"
-               dur="10s"
-               fill="freeze"
-               repeatCount="indefinite"
-               attributeName="fill"
-               values="transparent; red; transparent; red"
-               calcMode=”spline”
-               keySplines="0.4 0 0.2 1">
-      </animate>
-    </circle> -->
-
-
-    <!-- Testing line de tiempo -->
-    <line x1="0"
-          [attr.x2]="eventScores.length * 100"
-          y1="190"
-          y2="190"
-          stroke="red">
-    </line>
-    <text x="100"
-          y="195"
-          style="text-anchor: middle">Hello
-
-      <!--           <animate #polyscale
-          dur="10s"
-          fill="freeze"
-          repeatCount="indefinite"
-          attributeName="d"
-          [attr.values]="frameSequence"
-          calcMode=”spline”
-          keySplines="0.4 0 0.2 1">
- </animate> -->
-
-      <!--       <animateTransform dur="1s"
-                        begin="0s"
-                        fill="freeze"
-                        repeatCount="indefinite"
-                        attributeName="transform"
-                        type="rotate"
-                        values="0 100 195; 90 100 195; -90 100 195"
-                        calcMode=”spline”
-                        keySplines="0.4 0 0.2 1">
-      </animateTransform> -->
-      <!--
-      <animateTransform attributeName="transform"
-                        type="rotate"
-                        from="0 100 100"
-                        to="360 100 100"
-                        begin="0s"
-                        dur="10s"
-                        repeatCount="indefinite" /> -->
-    </text>
-    <text x="200"
-          y="195"
-          style="text-anchor: middle">there</text>
-    <text x="300"
-          y="195"
-          style="text-anchor: middle">i go
-
-    </text>
   </g>
 </svg>

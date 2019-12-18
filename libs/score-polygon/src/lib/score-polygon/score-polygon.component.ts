@@ -28,11 +28,10 @@ export class ScorePolygonComponent implements OnInit, OnChanges {
   private DEFAULTCONFIG = {
     showText: false,
     showIcons: true,
-    compareScores: true,
     showPercentPolygons: true,
     showOuterCircle: true,
-    scorePolygonColor: '#0e529e',
-    comparePolygonColor: 'transparent', //'#2f233e',
+    scorePolygonColor: 'orange',
+    comparePolygonColor: '#2f233e', //'transparent',
     maxScorePolygonColor: '#dadada',
     innerLinesColor: 'green',
     iconCircleColor: 'lightgrey',
@@ -70,8 +69,6 @@ export class ScorePolygonComponent implements OnInit, OnChanges {
       this[k] =
         userConfig[k] !== undefined ? userConfig[k] : this.DEFAULTCONFIG[k];
     }
-    console.log('config updated');
-
     this.changeDetector.markForCheck();
   }
 
@@ -88,7 +85,7 @@ export class ScorePolygonComponent implements OnInit, OnChanges {
       width: 200,
       scores: rawScores.map(sc => 10)
     });
-    this.vortexPoints = wrapperPolygon.points;
+    this.vortexPoints = wrapperPolygon.points; //used as placeholder for the score icons
     this.wrapperPolygon = scoresToSVGPolygon(rawScores.map(sc => 10), 200);
 
     this.polyscale.nativeElement.beginElement();
@@ -97,7 +94,7 @@ export class ScorePolygonComponent implements OnInit, OnChanges {
   get frameSequence(): string {
     const frame1 = this.getPolygonFromScores();
     const frame2 = this.getComparePolygon();
-    const frameSequence = `M${frame1} Z; M${frame2} Z;`;
+    const frameSequence = ` M${frame2} Z; M${frame1} Z;`;
 
     return frameSequence;
   }

@@ -1,0 +1,7 @@
+<ng-score-polygon [scores]="currentScore$ | async"
+                  [compareScores]="compareScore$ | async">
+</ng-score-polygon>
+<ng-score-polygon-controls [text]="'hello world'"
+                           (previous)="onShowPrevious()"
+                           (next)="onShowNext()">
+</ng-score-polygon-controls>

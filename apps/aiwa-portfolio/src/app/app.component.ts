@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ScorePolygonComponent } from '@aiwa-lab/score-polygon';
 import { SCORESMOCK } from '../assets/data/scores';
+import { ScorePolygonDataService } from 'libs/score-polygon/src/lib/score-polygon-data.service';
 
 @Component({
   selector: 'aiwa-lab-root',
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit {
   scores;
   compareScores;
   scoreSlide;
+
+  constructor(private scoreDataService: ScorePolygonDataService) {}
 
   ngOnInit() {
     this.updateEdges(this.edges);
@@ -30,7 +33,12 @@ export class AppComponent implements OnInit {
       eventLabel: months[i],
       scores: this.randomizeScores(scores)
     }));
-    console.log(this.scoreSlide);
+
+    this.scoreDataService.setScores([
+      this.scores,
+      this.compareScores,
+      this.scores
+    ]);
   }
 
   randomizeScores(scores) {
