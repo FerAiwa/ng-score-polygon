@@ -1,5 +1,27 @@
-<div style="display:flex">
-  <button (click)="previous.next()">Previous</button>
+<link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet">
+
+<div style="display: flex">
   <span style="flex:1; text-align: center">{{text}}</span>
-  <button (click)="next.next()">Next</button>
+</div>
+
+<div class="countdown-controls">
+  <button class="btn-round icon ion-md-infinite"
+          [ngClass]="{'active': loop}"
+          (click)="toggleLoop($event)">
+  </button>
+  <button class="btn-round icon ion-md-rewind"
+          (click)="previous.next()">
+  </button>
+
+  <button #playBtn
+          class="icon ion-md-play circle"
+          (click)="toggleAnimation.next()">
+  </button>
+
+  <button class="btn-round icon ion-md-fastforward"
+          (click)="next.next()">
+  </button>
 </div>

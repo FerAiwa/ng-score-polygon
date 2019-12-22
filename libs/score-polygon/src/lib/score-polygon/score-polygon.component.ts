@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ScorePolygon } from '../score-polygon';
 import { scoresToSVGPolygon, polygonToSVGPath } from '../SVG-mappers';
+import { DEFAULTCONFIG } from './default.config';
 
 export interface ScoreMarker {
   label: string;
@@ -24,20 +25,7 @@ export interface ScoreMarker {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./score-polygon.component.scss']
 })
-export class ScorePolygonComponent implements OnInit, OnChanges {
-  private DEFAULTCONFIG = {
-    showText: false,
-    showIcons: true,
-    showPercentPolygons: true,
-    showOuterCircle: true,
-    scorePolygonColor: 'orange',
-    comparePolygonColor: '#2f233e', //'transparent',
-    maxScorePolygonColor: '#dadada',
-    innerLinesColor: 'green',
-    iconCircleColor: 'lightgrey',
-    outerCircleColor: 'lightgrey'
-  };
-
+export class ScorePolygonComponent implements OnChanges {
   @ViewChild('polyscale', { static: true }) polyscale: ElementRef;
   @Input() scores: ScoreMarker[];
   @Input() compareScores: ScoreMarker[];
@@ -59,23 +47,23 @@ export class ScorePolygonComponent implements OnInit, OnChanges {
 
   /**
     Sets all the configuration params in one step and calls the changeDetector.
-    This is an alternative to set params via template using the [ property binding ] syntax.
-
-    If a param is not provided it will use the value specified in the default config.
+    This is an alternative to set params via template using property binding.
+    If a param is not provided it will use the default config value.
   */
-  set config(userConfig) {
-    const configKeys = Object.keys(this.DEFAULTCONFIG);
+  @Input() set config(userConfig) {
+    console.log('called config', userConfig);
+    const configKeys = Object.keys(DEFAULTCONFIG);
     for (const k of configKeys) {
       this[k] =
-        userConfig[k] !== undefined ? userConfig[k] : this.DEFAULTCONFIG[k];
+        userConfig && userConfig[k] !== undefined
+          ? userConfig[k]
+          : DEFAULTCONFIG[k];
     }
     this.changeDetector.markForCheck();
   }
 
-  constructor(public changeDetector: ChangeDetectorRef) {}
-
-  ngOnInit() {
-    this.config = this.DEFAULTCONFIG;
+  constructor(public changeDetector: ChangeDetectorRef) {
+    this.config = { ...DEFAULTCONFIG };
   }
 
   ngOnChanges() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ScorePolygonComponent } from '@aiwa-lab/score-polygon';
+import { ScorePolygonComparerComponent } from '@aiwa-lab/score-polygon';
 import { SCORESMOCK } from '../assets/data/scores';
-import { ScorePolygonDataService } from 'libs/score-polygon/src/lib/score-polygon-data.service';
+import { ScorePolygonDataService } from '@aiwa-lab/score-polygon';
 
 @Component({
   selector: 'aiwa-lab-root',
@@ -9,8 +9,8 @@ import { ScorePolygonDataService } from 'libs/score-polygon/src/lib/score-polygo
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild(ScorePolygonComponent, { static: false })
-  polygonComponent: ScorePolygonComponent;
+  @ViewChild(ScorePolygonComparerComponent, { static: false })
+  scorecomparerComponent: ScorePolygonComparerComponent;
   edges = 5;
   scores;
   compareScores;
@@ -28,16 +28,11 @@ export class AppComponent implements OnInit {
     this.scores = this.randomizeScores(scores);
     this.compareScores = this.randomizeScores(scores);
 
-    const months = ['Jan', 'Feb', 'Mar', 'May', 'Jun'];
-    this.scoreSlide = new Array(5).fill('').map((x, i) => ({
-      eventLabel: months[i],
-      scores: this.randomizeScores(scores)
-    }));
-
+    const months = ['Enero', 'Febrero', 'Marzo', 'Mayo', 'Junio'];
     this.scoreDataService.setScores([
-      this.scores,
-      this.compareScores,
-      this.scores
+      { scores: this.randomizeScores(scores), profileName: months[0] },
+      { scores: this.randomizeScores(scores), profileName: months[1] },
+      { scores: this.randomizeScores(scores), profileName: months[2] }
     ]);
   }
 
@@ -72,12 +67,12 @@ export class AppComponent implements OnInit {
     this.updatePolygonComponent('showText', checked);
   }
 
-  updatePolygonComponent(part: string, value: any) {
-    this.polygonComponent[part] = value;
-    this.polygonComponent.changeDetector.markForCheck();
-  }
-
   updateOuterCircleDisplay(checked: boolean) {
     this.updatePolygonComponent('showOuterCircle', checked);
+  }
+
+  updatePolygonComponent(part: string, value: any) {
+    this.scorecomparerComponent.polygonComponent[part] = value;
+    this.scorecomparerComponent.polygonComponent.changeDetector.markForCheck();
   }
 }

@@ -1,0 +1,48 @@
+:host {
+}
+
+.countdown-controls {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  border: 1px solid lightgrey 0;
+}
+span {
+  color: #474646;
+  padding: 0.5rem;
+}
+button {
+  transform: translateX(-55%);
+  margin: 0.25rem;
+  color: lightgrey;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  background-color: white;
+  border: 1.25px solid blue;
+  outline: 0;
+  border: 0;
+
+  &.active,
+  &:hover {
+    color: #474646;
+  }
+
+  &.circle {
+    border: 1.25px solid lightgrey;
+    transition: all 0.25s;
+    &:hover {
+      border-color: #8b8989;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  & i {
+    font-size: 1.2rem;
+    &:hover {
+      color: white;
+    }
+  }
+}

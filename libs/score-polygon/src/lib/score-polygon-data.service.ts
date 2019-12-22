@@ -5,9 +5,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ScorePolygonDataService {
+  private config = new BehaviorSubject<any>(null);
+  public config$ = this.config.asObservable();
   private scores = new BehaviorSubject<any>([]);
   public scores$ = this.scores.asObservable();
-  currentIndex$ = new BehaviorSubject<number>(0);
+
+  setConfig(config) {
+    this.config.next(config);
+  }
 
   getScores() {
     return this.scores.getValue();
@@ -20,8 +25,4 @@ export class ScorePolygonDataService {
   addScore(score) {
     this.scores.next([...this.getScores(), score]);
   }
-
-  showNextScore() {}
-
-  showPreviousScore() {}
 }
