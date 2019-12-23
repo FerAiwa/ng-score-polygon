@@ -4,9 +4,7 @@ import {
   ViewChild,
   OnInit,
   Input,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  AfterViewInit
 } from '@angular/core';
 import { combineLatest, BehaviorSubject, timer, merge } from 'rxjs';
 import { skipWhile, takeUntil } from 'rxjs/operators';
@@ -69,11 +67,6 @@ export class ScorePolygonComparerComponent
   play = true;
 
   startAnimation(speed: number, delay: number) {
-    console.log(speed, delay);
-    console.log('starting animation');
-    const scoreSize = this.scores$.getValue().length;
-    // totalAnimationTime = speed * 1000 * scoreSize;
-
     const reachedLimitAndNoLoop$ = this.indexLimitReached$.pipe(
       skipWhile(limit => !limit || this.loop)
     );
@@ -94,7 +87,6 @@ export class ScorePolygonComparerComponent
   }
 
   stopAnimation() {
-    console.log('animation stop');
     this.play = false;
   }
 
@@ -158,6 +150,4 @@ export class ScorePolygonComparerComponent
   ngOnDestroy() {
     this.scoresSlider$.unsubscribe();
   }
-
-  constructor(private cdr: ChangeDetectorRef) {}
 }

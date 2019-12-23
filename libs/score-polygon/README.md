@@ -10,7 +10,7 @@ Want a peek before downloading? There is a demo avaliable [here](https://feraiwa
 
 _v.1.0_ released! (23/12/19)
 
-- score-polygon-comparer component:
+- ng-score-polygon-comparer:
 
   Compare multiple score profiles, play as animation or navigate using the navigation menu.
 
@@ -19,13 +19,6 @@ _v.1.0_ released! (23/12/19)
   Check the score-polygon-comparer section for details.
 
 - Added more customization options for the score-polygon-component.Details in Extra Customization section.
-
-## Description
-
-This component automaticaly generates regular N-side polygons for a list of scores. This can be specialy apealing
-to display rated lists from 3 to 12 elements.
-
-The component is totaly responsive, and most of the the styling is customizable. Check the Customization section for details.
 
 ## Installation
 
@@ -51,6 +44,13 @@ export class AppModule {}
 ```
 
 ## Basic usage ng-score-component
+
+### Description
+
+This component automaticaly generates regular N-side polygons for a list of scores. This can be specialy apealing
+to display rated lists from 3 to 12 elements.
+
+The component is totaly responsive, and most of the the styling is customizable. Check the Customization section for details.
 
 1. Create your scores, with the following format:
 
@@ -103,7 +103,7 @@ js object. Keys are listed below.
 | `[showPercentPolygons]` | Enables/disables small polygons from outside to the center with 10% separation. | true    |
 | `[ showOuterCircle ]`   | Shows/hides the circle surrounding the polygon                                  | true    |
 
-## ng-score-comparer ( **_NEW!_**)
+## ng-score-polygon-comparer ( **_NEW!_**)
 
 This component provides a visible control UI that allows user to navigate between multiple
 score sets, or play them as a slide show.
@@ -118,7 +118,7 @@ Just provide the score sets, and it will automaticaly configurate the ng-score-p
 
 ```typescript
 interface ScoreSet {
-  scores: [{ score: number; label: string }];
+  scores: [{ score: number; label: string; markerImage?: string }];
   setName: string;
 }
 ```
@@ -138,8 +138,8 @@ const myScores = [
 | -------------- | ---------------------------------------------------------------------------------------------------------- | ------- |
 | `[ autoplay ]` | Begins the slide when the component loads                                                                  | true    |
 | `[ loop ]`     | Enables/disables the score labels at the polygon edges.                                                    | true    |
-| `[ speed ]`    | Time between a slide and the next (s)                                                                      | 1.5     |
-| `[ delay ]`    | Time before animation starts. (s)                                                                          | 2       |
+| `[ speed ]`    | Time between a slide and the next (ms)                                                                     | 1500    |
+| `[ delay ]`    | Time before animation starts. (ms)                                                                         | 1500    |
 | `[ config ]`   | The config that will be set in the score-polygon. Check Extra customization section for the complete list. |
 
 ## Contact
