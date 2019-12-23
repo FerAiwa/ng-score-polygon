@@ -10,13 +10,16 @@ Want a peek before downloading? There is a demo avaliable [here](https://feraiwa
 
 _v.1.0_ released! (23/12/19)
 
-- ng-score-polygon-comparer:
+- **ng-score-polygon-comparer** (_new!_)
 
-  Compare multiple score profiles, play as animation or navigate using the navigation menu.
 
-  Watch the graphic change over time in a cool transformation animation.
+    <img src="https://feraiwa.github.io/ng-score-polygon/assets/ng-score-polygon-comparer.jpg" alt="Image of ng-polygon-score-comparer component text" width="250" height="auto">
 
-  Check the score-polygon-comparer section for details.
+Compare multiple score profiles, play as animation or navigate using the navigation menu.
+
+Watch the graphic change over time in a cool evolution animation.
+
+Check the score-polygon-comparer section for details.
 
 - Added more customization options for the score-polygon-component.Details in Extra Customization section.
 
@@ -79,9 +82,10 @@ userScores = [
 
 Colors and maker´s format can be changed using [property binding].
 
-**NEW!** [config]`
+**NEW!** `[config]`
 If you want to set up multiple variables at once, just send the configuration as a plain
-js object. Keys are listed below.
+js object. Keys are listed below. Just send the ones you actualy want to change, the
+rest of variables will remain with the last value assigned or the default.
 
 ### Colors (string)
 

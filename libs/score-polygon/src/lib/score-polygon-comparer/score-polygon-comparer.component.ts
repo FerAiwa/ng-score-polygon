@@ -67,6 +67,8 @@ export class ScorePolygonComparerComponent
   play = true;
 
   startAnimation(speed: number, delay: number) {
+    this.indexLimitReached$.next(false);
+
     const reachedLimitAndNoLoop$ = this.indexLimitReached$.pipe(
       skipWhile(limit => !limit || this.loop)
     );
@@ -91,7 +93,6 @@ export class ScorePolygonComparerComponent
   }
 
   restartFrames() {
-    console.log('frames restart');
     this.currentIndex$.next(0);
     this.indexLimitReached$.next(false);
   }
