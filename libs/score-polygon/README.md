@@ -2,9 +2,23 @@
 
 ![Image of ng-polygon-score](https://repository-images.githubusercontent.com/225927254/9748c900-16db-11ea-9f54-0e731cad1a80)
 
-## Latest news:
-_v.1.0_ released! (23/12/19) New score-polygon-comparer component, multiple score sets representation, and new customization options!
-Check the score-polygon-comparer section for details.
+## Demo
+
+Want a peek before downloading? There is a demo avaliable [here](https://feraiwa.github.io/ng-score-polygon/)
+
+## Latest release:
+
+_v.1.0_ released! (23/12/19)
+
+- score-polygon-comparer component:
+
+  Compare multiple score profiles, play as animation or navigate using the navigation menu.
+
+  Watch the graphic change over time in a cool transformation animation.
+
+  Check the score-polygon-comparer section for details.
+
+- Added more customization options for the score-polygon-component.Details in Extra Customization section.
 
 ## Description
 
@@ -12,10 +26,6 @@ This component automaticaly generates regular N-side polygons for a list of scor
 to display rated lists from 3 to 12 elements.
 
 The component is totaly responsive, and most of the the styling is customizable. Check the Customization section for details.
-
-## Demo
-
-Want a peek before downloading? There is a demo avaliable [here](https://feraiwa.github.io/ng-score-polygon/)
 
 ## Installation
 
@@ -70,7 +80,7 @@ userScores = [
 Colors and maker´s format can be changed using [property binding].
 
 **NEW!** [config]`
-If  you want to set up multiple variables at once, just send the configuration as a plain
+If you want to set up multiple variables at once, just send the configuration as a plain
 js object. Keys are listed below.
 
 ### Colors (string)

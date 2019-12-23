@@ -15,7 +15,6 @@ import { ScorePolygonControlsComponent } from '../score-polygon-controls/score-p
 
 @Component({
   selector: 'ng-score-polygon-comparer',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-score-polygon
       [scores]="activeScores"
@@ -36,8 +35,8 @@ export class ScorePolygonComparerComponent
   // USER SETUP ----------------------------------------------
   @Input() autoplay = true;
   @Input() loop = true;
-  @Input() speed = 5.5;
-  @Input() delay = 0;
+  @Input() speed = 1500;
+  @Input() delay = 1500;
   @Input() set scoreSets(value: any[]) {
     this.scores$.next(value);
   }
@@ -69,9 +68,11 @@ export class ScorePolygonComparerComponent
   controlText = '';
   play = true;
 
-  startAnimation(speed = 1, delay = 2000, loop = true) {
+  startAnimation(speed: number, delay: number) {
+    console.log(speed, delay);
+    console.log('starting animation');
     const scoreSize = this.scores$.getValue().length;
-    const totalAnimationTime = speed * 1000 * scoreSize;
+    // totalAnimationTime = speed * 1000 * scoreSize;
 
     const reachedLimitAndNoLoop$ = this.indexLimitReached$.pipe(
       skipWhile(limit => !limit || this.loop)
@@ -83,7 +84,7 @@ export class ScorePolygonComparerComponent
       controls.previous,
       controls.toggleAnimation.pipe(skipWhile(() => this.play))
     );
-    timer(delay, totalAnimationTime)
+    timer(delay, speed + 2000)
       .pipe(takeUntil(stopConditions$))
       .subscribe(
         () => this.onNextScore(),
@@ -93,10 +94,12 @@ export class ScorePolygonComparerComponent
   }
 
   stopAnimation() {
+    console.log('animation stop');
     this.play = false;
   }
 
   restartFrames() {
+    console.log('frames restart');
     this.currentIndex$.next(0);
     this.indexLimitReached$.next(false);
   }
@@ -117,7 +120,7 @@ export class ScorePolygonComparerComponent
       const isLastIndex = this.scores$.getValue().length - 1 === i;
       if (isLastIndex) this.restartFrames();
 
-      return this.startAnimation(this.speed, this.delay, this.loop);
+      return this.startAnimation(this.speed, this.delay);
     });
   }
 
@@ -142,7 +145,6 @@ export class ScorePolygonComparerComponent
     this.refScores = j !== undefined ? scores[j].scores : [];
 
     this.controlText = scores[i].setName;
-    this.cdr.markForCheck();
   }
 
   ngOnInit() {
@@ -150,7 +152,7 @@ export class ScorePolygonComparerComponent
   }
 
   ngAfterViewInit() {
-    if (this.autoplay) this.startAnimation();
+    if (this.autoplay) this.startAnimation(this.speed, this.delay);
   }
 
   ngOnDestroy() {
