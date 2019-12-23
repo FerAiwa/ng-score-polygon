@@ -2,6 +2,10 @@
 
 ![Image of ng-polygon-score](https://repository-images.githubusercontent.com/225927254/9748c900-16db-11ea-9f54-0e731cad1a80)
 
+## Latest news:
+_v.1.0_ released! (23/12/19) New score-polygon-comparer component, multiple score sets representation, and new customization options!
+Check the score-polygon-comparer section for details.
+
 ## Description
 
 This component automaticaly generates regular N-side polygons for a list of scores. This can be specialy apealing
@@ -13,12 +17,10 @@ The component is totaly responsive, and most of the the styling is customizable.
 
 Want a peek before downloading? There is a demo avaliable [here](https://feraiwa.github.io/ng-score-polygon/)
 
-## Instalation
+## Installation
 
 - In your Angular project:
   `npm i ng-score-polygon --save`
-
-## Basic usage
 
 1. Import the ScorePolygonModule in your Angular app.
 
@@ -38,7 +40,9 @@ import { ScorePolygonModule } from 'ng-score-polygon';
 export class AppModule {}
 ```
 
-2. Create your scores, with the following format:
+## Basic usage ng-score-component
+
+1. Create your scores, with the following format:
 
    `{ label: string; score: number; markerImage?: string; }`
 
@@ -55,7 +59,7 @@ userScores = [
 ];
 ```
 
-3. Define the component in your template.
+2. Define the component in your template.
 
    ```xml
    <ng-score-polygon [scores]="userScores"></ng-score-polygon>
@@ -65,11 +69,16 @@ userScores = [
 
 Colors and maker´s format can be changed using [property binding].
 
+**NEW!** [config]`
+If  you want to set up multiple variables at once, just send the configuration as a plain
+js object. Keys are listed below.
+
 ### Colors (string)
 
 | Variable                   | Description                                             |
 | -------------------------- | ------------------------------------------------------- |
 | `[ scorePolygonColor ]`    | Sets color of the score polygon.                        |
+| `[ comparePolygonColor ]`  | Sets color of the compare polygon. ( **_NEW!_**)        |
 | `[ maxScorePolygonColor ]` | Sets color of the wrapper polygon.                      |
 | `[ innerLinesColor ]`      | Sets color of the lines from edge to center of polygon. |
 | `[ iconBorderColor ]`      | Sets color of the icons border.                         |
@@ -83,6 +92,45 @@ Colors and maker´s format can be changed using [property binding].
 | `[ showIcons ]`         | Enable/disables a rounded icon at the polygon edges.                            | true    |
 | `[showPercentPolygons]` | Enables/disables small polygons from outside to the center with 10% separation. | true    |
 | `[ showOuterCircle ]`   | Shows/hides the circle surrounding the polygon                                  | true    |
+
+## ng-score-comparer ( **_NEW!_**)
+
+This component provides a visible control UI that allows user to navigate between multiple
+score sets, or play them as a slide show.
+
+Just provide the score sets, and it will automaticaly configurate the ng-score-polygon component for you.
+
+```xml
+<ng-score-polygon [scoreSets]="userScores"></ng-score-polygon>
+```
+
+### Interface
+
+```typescript
+interface ScoreSet {
+  scores: [{ score: number; label: string }];
+  setName: string;
+}
+```
+
+Example
+
+```typescript
+const myScores = [
+  { setName: 'January', scores: [{ energy: 10, proactivity: 10 }]}
+  { setName: 'February', scores: [{ energy: 8.5, proactivity: 6.5}]
+]
+```
+
+### Aditional config
+
+| Variable       | Description                                                                                                | Default |
+| -------------- | ---------------------------------------------------------------------------------------------------------- | ------- |
+| `[ autoplay ]` | Begins the slide when the component loads                                                                  | true    |
+| `[ loop ]`     | Enables/disables the score labels at the polygon edges.                                                    | true    |
+| `[ speed ]`    | Time between a slide and the next (s)                                                                      | 1.5     |
+| `[ delay ]`    | Time before animation starts. (s)                                                                          | 2       |
+| `[ config ]`   | The config that will be set in the score-polygon. Check Extra customization section for the complete list. |
 
 ## Contact
 

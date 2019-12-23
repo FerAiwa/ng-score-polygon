@@ -6,7 +6,6 @@ import {
   ChangeDetectorRef,
   ViewChild,
   ElementRef,
-  OnInit
 } from '@angular/core';
 import { ScorePolygon } from '../score-polygon';
 import { scoresToSVGPolygon, polygonToSVGPath } from '../SVG-mappers';
@@ -51,13 +50,16 @@ export class ScorePolygonComponent implements OnChanges {
     If a param is not provided it will use the default config value.
   */
   @Input() set config(userConfig) {
-    console.log('called config', userConfig);
     const configKeys = Object.keys(DEFAULTCONFIG);
     for (const k of configKeys) {
-      this[k] =
-        userConfig && userConfig[k] !== undefined
-          ? userConfig[k]
-          : DEFAULTCONFIG[k];
+      const userConfigProvidesKey = userConfig && userConfig[k] !== undefined;
+      const keyIsNotSet = this[k] === undefined;
+
+      if (userConfigProvidesKey) {
+        this[k] = userConfig[k];
+      } else if (keyIsNotSet) {
+        this[k] = DEFAULTCONFIG[k];
+      }
     }
     this.changeDetector.markForCheck();
   }
@@ -73,7 +75,7 @@ export class ScorePolygonComponent implements OnChanges {
       width: 200,
       scores: rawScores.map(sc => 10)
     });
-    this.vortexPoints = wrapperPolygon.points; //used as placeholder for the score icons
+    this.vortexPoints = wrapperPolygon.points; //used to position score icons
     this.wrapperPolygon = scoresToSVGPolygon(rawScores.map(sc => 10), 200);
 
     this.polyscale.nativeElement.beginElement();

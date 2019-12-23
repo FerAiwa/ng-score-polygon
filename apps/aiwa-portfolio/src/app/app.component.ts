@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ScorePolygonComparerComponent } from '@aiwa-lab/score-polygon';
 import { SCORESMOCK } from '../assets/data/scores';
-import { ScorePolygonDataService } from '@aiwa-lab/score-polygon';
-
 @Component({
   selector: 'aiwa-lab-root',
   templateUrl: './app.component.html',
@@ -11,12 +9,12 @@ import { ScorePolygonDataService } from '@aiwa-lab/score-polygon';
 export class AppComponent implements OnInit {
   @ViewChild(ScorePolygonComparerComponent, { static: false })
   scorecomparerComponent: ScorePolygonComparerComponent;
+  config;
   edges = 5;
   scores;
   compareScores;
   scoreSlide;
-
-  constructor(private scoreDataService: ScorePolygonDataService) {}
+  scoreSets;
 
   ngOnInit() {
     this.updateEdges(this.edges);
@@ -29,11 +27,11 @@ export class AppComponent implements OnInit {
     this.compareScores = this.randomizeScores(scores);
 
     const months = ['Enero', 'Febrero', 'Marzo', 'Mayo', 'Junio'];
-    this.scoreDataService.setScores([
-      { scores: this.randomizeScores(scores), profileName: months[0] },
-      { scores: this.randomizeScores(scores), profileName: months[1] },
-      { scores: this.randomizeScores(scores), profileName: months[2] }
-    ]);
+    this.scoreSets = [
+      { scores: this.randomizeScores(scores), setName: months[0] },
+      { scores: this.randomizeScores(scores), setName: months[1] },
+      { scores: this.randomizeScores(scores), setName: months[2] }
+    ];
   }
 
   randomizeScores(scores) {
@@ -71,8 +69,13 @@ export class AppComponent implements OnInit {
     this.updatePolygonComponent('showOuterCircle', checked);
   }
 
+  updateComparePolygonColor(color: string) {
+    this.updatePolygonComponent('comparePolygonColor', color);
+  }
+
   updatePolygonComponent(part: string, value: any) {
-    this.scorecomparerComponent.polygonComponent[part] = value;
-    this.scorecomparerComponent.polygonComponent.changeDetector.markForCheck();
+    this.config = {
+      [part]: value
+    };
   }
 }

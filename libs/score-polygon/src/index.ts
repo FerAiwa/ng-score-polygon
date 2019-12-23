@@ -6,5 +6,3 @@ export {
 export {
   ScorePolygonComparerComponent
 } from './lib/score-polygon-comparer/score-polygon-comparer.component';
-
-export { ScorePolygonDataService } from './lib/score-polygon-data.service';

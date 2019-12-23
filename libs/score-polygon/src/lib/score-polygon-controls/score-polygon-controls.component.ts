@@ -15,13 +15,12 @@ import {
 })
 export class ScorePolygonControlsComponent {
   @ViewChild('playBtn', { static: true }) playBtn;
-  @Input() set play(v) {
+  @Input() set play(flag: boolean) {
     const playBtn = this.playBtn.nativeElement;
     playBtn.classList.toggle('ion-md-play');
     playBtn.classList.toggle('ion-md-pause');
     playBtn.classList.toggle('active');
   }
-
   @Input() text: string;
   @Input() loop = false;
   @Output() loopAnimation = new EventEmitter();

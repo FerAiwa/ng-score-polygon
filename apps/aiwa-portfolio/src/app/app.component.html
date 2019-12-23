@@ -40,13 +40,19 @@
 
     <h2>Colors</h2>
     <div>
-      <label>Score polygon </label>
+      <label>Current Score polygon </label>
       <input type="color"
-             value="#0e529e"
+             value="#FF7F50"
              (change)="updateColor($event.target.value)">
     </div>
     <div>
-      <label>Max Score Polygon</label>
+      <label>Previous Score polygon </label>
+      <input type="color"
+             value="#2f233e"
+             (change)="updateComparePolygonColor($event.target.value)">
+    </div>
+    <div>
+      <label>Max Score polygon </label>
       <input type="color"
              value="#dadada"
              (change)="updateBackgroundColor($event.target.value)">
@@ -88,18 +94,9 @@
     </div>
 
   </section>
-  <!--   <ng-score-polygon style="flex:1;  max-width: 620px;"
-                    [scores]="scores"
-                    [compareScores]="compareScores">
-  </ng-score-polygon> -->
 
-  <!--   <ng-score-polygon-slide style="flex:1;  max-width: 620px;"
-                          [scores]="scores"
-                          [eventScores]="scoreSlide">
-
-  </ng-score-polygon-slide> -->
-
-  <ng-score-polygon-comparer [config]="{showOuterCircle: false}">
+  <ng-score-polygon-comparer [config]="config"
+                             [scoreSets]="scoreSets">
   </ng-score-polygon-comparer>
 
 </div>

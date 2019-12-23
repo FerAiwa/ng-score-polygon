@@ -4,16 +4,18 @@ import {
   ViewChild,
   OnInit,
   Input,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { combineLatest, BehaviorSubject, timer, merge } from 'rxjs';
 import { skipWhile, takeUntil } from 'rxjs/operators';
-import { ScorePolygonDataService } from '../score-polygon-data.service';
+import { ScoreSet } from '../interfaces';
 import { ScorePolygonControlsComponent } from '../score-polygon-controls/score-polygon-controls.component';
-import { ScorePolygonComponent } from '../score-polygon/score-polygon.component';
 
 @Component({
   selector: 'ng-score-polygon-comparer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-score-polygon
       [scores]="activeScores"
@@ -32,23 +34,24 @@ import { ScorePolygonComponent } from '../score-polygon/score-polygon.component'
 export class ScorePolygonComparerComponent
   implements OnInit, AfterViewInit, OnDestroy {
   // USER SETUP ----------------------------------------------
-  @Input() set config(value) {
-    this.scoreDataService.setConfig(value);
-  }
   @Input() autoplay = true;
   @Input() loop = true;
-  @Input() speed = 1;
-  @Input() delay = 2000;
+  @Input() speed = 5.5;
+  @Input() delay = 0;
+  @Input() set scoreSets(value: any[]) {
+    this.scores$.next(value);
+  }
+  @Input() set config(value) {
+    this.polygonConfig$.next(value);
+  }
 
   // ANIMATION CONTROL ---------------------------------------
-  currentIndex$ = new BehaviorSubject<number>(0);
-  indexLimitAnouncer$ = new BehaviorSubject<boolean>(false);
+  private scores$ = new BehaviorSubject<ScoreSet[]>([]);
+  private currentIndex$ = new BehaviorSubject<number>(0);
+  private indexLimitReached$ = new BehaviorSubject<boolean>(false);
 
   // Updates polygon whenever data or current index changes
-  scoresSlider$ = combineLatest(
-    this.scoreDataService.scores$,
-    this.currentIndex$
-  )
+  scoresSlider$ = combineLatest(this.scores$, this.currentIndex$)
     .pipe(skipWhile(([scores]) => !scores.length))
     .subscribe(([scores, i]) => {
       const previousIndex = i - 1;
@@ -57,29 +60,25 @@ export class ScorePolygonComparerComponent
       else this.compareScores(scores, i, previousIndex);
     });
 
-  // CHILD COMPONENTS SETUP ------------------------------------
-  @ViewChild(ScorePolygonComponent, { static: true })
-  polygonComponent: ScorePolygonComponent;
+  // COMPONENTS SETUP ------------------------------------
   @ViewChild(ScorePolygonControlsComponent, { static: true })
   controlsComponent: ScorePolygonControlsComponent;
-
-  polygonConfig$ = this.scoreDataService.config$.pipe(
-    skipWhile(config => !config)
-  );
+  public polygonConfig$ = new BehaviorSubject<any>(null);
   activeScores = null;
   refScores = null;
   controlText = '';
   play = true;
 
   startAnimation(speed = 1, delay = 2000, loop = true) {
-    const scoreSize = this.scoreDataService.getScores().length;
-    const totalAnimationTime = speed * scoreSize * 1000;
-    const controls = this.controlsComponent;
-    const onReachLimitAndNoLoop$ = this.indexLimitAnouncer$.pipe(
+    const scoreSize = this.scores$.getValue().length;
+    const totalAnimationTime = speed * 1000 * scoreSize;
+
+    const reachedLimitAndNoLoop$ = this.indexLimitReached$.pipe(
       skipWhile(limit => !limit || this.loop)
     );
+    const controls = this.controlsComponent;
     const stopConditions$ = merge(
-      onReachLimitAndNoLoop$,
+      reachedLimitAndNoLoop$,
       controls.next,
       controls.previous,
       controls.toggleAnimation.pipe(skipWhile(() => this.play))
@@ -99,10 +98,10 @@ export class ScorePolygonComparerComponent
 
   restartFrames() {
     this.currentIndex$.next(0);
-    this.indexLimitAnouncer$.next(false);
+    this.indexLimitReached$.next(false);
   }
 
-  ngOnInit() {
+  setControlListeners() {
     const controls = this.controlsComponent;
     controls.next.subscribe(() => this.onNextScore());
     controls.previous.subscribe(() => this.onPreviousScore());
@@ -110,31 +109,27 @@ export class ScorePolygonComparerComponent
 
     controls.toggleAnimation.subscribe(() => {
       this.play = !this.play;
-
       if (!this.play) {
         return this.stopAnimation();
       }
-      const i = this.currentIndex$.getValue();
-      const isLastIndex = this.scoreDataService.getScores().length - 1 <= i;
 
+      const i = this.currentIndex$.getValue();
+      const isLastIndex = this.scores$.getValue().length - 1 === i;
       if (isLastIndex) this.restartFrames();
+
       return this.startAnimation(this.speed, this.delay, this.loop);
     });
   }
 
-  ngAfterViewInit() {
-    if (this.autoplay) this.startAnimation();
-  }
-
   onNextScore() {
     let i = this.currentIndex$.getValue();
-    const hasMoreScores = this.scoreDataService.getScores().length > i + 1;
+    const hasMoreScores = this.scores$.getValue().length > i + 1;
 
     return hasMoreScores
       ? this.currentIndex$.next(++i)
       : this.loop === true
       ? this.currentIndex$.next(0)
-      : this.indexLimitAnouncer$.next(true);
+      : this.indexLimitReached$.next(true);
   }
 
   onPreviousScore() {
@@ -146,12 +141,21 @@ export class ScorePolygonComparerComponent
     this.activeScores = scores[i].scores;
     this.refScores = j !== undefined ? scores[j].scores : [];
 
-    this.controlText = scores[i].profileName;
+    this.controlText = scores[i].setName;
+    this.cdr.markForCheck();
   }
 
-  constructor(private scoreDataService: ScorePolygonDataService) {}
+  ngOnInit() {
+    this.setControlListeners();
+  }
+
+  ngAfterViewInit() {
+    if (this.autoplay) this.startAnimation();
+  }
 
   ngOnDestroy() {
     this.scoresSlider$.unsubscribe();
   }
+
+  constructor(private cdr: ChangeDetectorRef) {}
 }
