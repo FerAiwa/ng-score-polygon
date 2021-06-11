@@ -1,7 +1,7 @@
 {
   "name": "ng-score-polygon",
   "description": "Angular lib to create regular SVG polygons, to represent and compare lists of scores",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Fer Ayguavives (https://github.com/FerAiwa)",
   "license": "MIT",
   "keywords": [
@@ -23,7 +23,7 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.0",
-    "@angular/core": "^8.2.0"
+    "@angular/common": "^12.0.4",
+    "@angular/compiler": "^12.0.4"
   }
 }

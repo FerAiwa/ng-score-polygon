@@ -1,6 +1,9 @@
 # ChangeLog
 
-## _Last Release: 1.0.0_
+## _Last Release: 1.1.0_
+
+## v. 1.1.0 (11/16/21)
+ Upgraded from Angular 8 to Angular 12
 
 ## v. 1.0.0 (23/12/19)
 
