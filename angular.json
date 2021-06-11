@@ -20,13 +20,18 @@
             "main": "apps/aiwa-portfolio/src/main.ts",
             "polyfills": "apps/aiwa-portfolio/src/polyfills.ts",
             "tsConfig": "apps/aiwa-portfolio/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "apps/aiwa-portfolio/src/favicon.ico",
               "apps/aiwa-portfolio/src/assets"
             ],
             "styles": ["apps/aiwa-portfolio/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -56,7 +61,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
