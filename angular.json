@@ -20,7 +20,7 @@
             "main": "apps/aiwa-portfolio/src/main.ts",
             "polyfills": "apps/aiwa-portfolio/src/polyfills.ts",
             "tsConfig": "apps/aiwa-portfolio/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "apps/aiwa-portfolio/src/favicon.ico",
               "apps/aiwa-portfolio/src/assets"
@@ -41,7 +41,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -136,7 +135,12 @@
             "tsConfig": "libs/score-polygon/tsconfig.lib.json",
             "project": "libs/score-polygon/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "libs/score-polygon/tsconfig.lib.prod.json"
+            }
+          }
+},
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {

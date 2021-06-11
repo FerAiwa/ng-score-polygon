@@ -7,7 +7,7 @@ import { SCORESMOCK } from '../assets/data/scores';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild(ScorePolygonComparerComponent, { static: false })
+  @ViewChild(ScorePolygonComparerComponent)
   scorecomparerComponent: ScorePolygonComparerComponent;
   config;
   edges = 5;
